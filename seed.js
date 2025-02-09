@@ -23,7 +23,7 @@ async function seed() {
 
   await prisma.comment.create({
     data: {
-      content: "same!",
+      content: "Nce!",
       userId: iggy.id,
       reviewId: review.id,
     },

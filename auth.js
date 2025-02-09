@@ -27,6 +27,10 @@ router.post("/register", async (req, res, next) => {
     res.status(201).json({ token });
   } catch (error) {
     next(error);
+    console.error("Registration Error:", error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 
@@ -49,5 +53,5 @@ router.get("/me", isLoggedIn, (req, res) => {
 
 module.exports = {
   router,
-  isLoggedIn
+  isLoggedIn,
 };
