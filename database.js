@@ -10,7 +10,6 @@ const createUser = async (username, password) => {
     }
   });
 };
-
 const loginUser = async (username, password) => {
   return await prisma.user.findFirst({
     where: {
@@ -19,12 +18,12 @@ const loginUser = async (username, password) => {
     }
   });
 };
-
 const getUser = async (id) => {
   return await prisma.user.findUnique({
     where: { id }
   });
 };
+
 
 module.exports = {
   prisma,

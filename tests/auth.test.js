@@ -6,7 +6,6 @@ describe('Auth API Tests', () => {
   beforeAll(async () => {
     await prisma.user.deleteMany();
   });
-
   test('Register a new user', async () => {
     const res = await request(app)
       .post('/api/auth/register')
@@ -15,7 +14,6 @@ describe('Auth API Tests', () => {
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('token');
   });
-
   test('Login with correct credentials', async () => {
     const res = await request(app)
       .post('/api/auth/login')
@@ -24,7 +22,6 @@ describe('Auth API Tests', () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('token');
   });
-
   test('Login with incorrect credentials', async () => {
     const res = await request(app)
       .post('/api/auth/login')

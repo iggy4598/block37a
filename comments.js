@@ -12,7 +12,6 @@ router.post('/:itemId/:reviewId', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
 router.get('/me', isLoggedIn, async (req, res, next) => {
   try {
     const comments = await getComments(req.user.id);
@@ -21,7 +20,6 @@ router.get('/me', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
 router.put('/:commentId', isLoggedIn, async (req, res, next) => {
   try {
     const updatedComment = await updateComment(req.user.id, req.params.commentId, req.body.commentText);
@@ -30,7 +28,6 @@ router.put('/:commentId', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
 router.delete('/:commentId', isLoggedIn, async (req, res, next) => {
   try {
     await deleteComment(req.user.id, req.params.commentId);

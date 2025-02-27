@@ -12,7 +12,6 @@ router.get('/:itemId/:reviewId', async (req, res, next) => {
     next(error);
   }
 });
-
 router.post('/:itemId', isLoggedIn, async (req, res, next) => {
   try {
     const { reviewText, rating } = req.body;
@@ -22,7 +21,6 @@ router.post('/:itemId', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
 router.get('/me', isLoggedIn, async (req, res, next) => {
   try {
     const reviews = await getReviews(req.user.id);
@@ -31,7 +29,6 @@ router.get('/me', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
 router.put('/:reviewId', isLoggedIn, async (req, res, next) => {
   try {
     const updatedReview = await updateReview(req.user.id, req.params.reviewId, req.body.reviewText);

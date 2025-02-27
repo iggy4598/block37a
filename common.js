@@ -52,18 +52,15 @@ const authController = {
       res.status(400).json({ message: "Error logging in" });
     }
   },
-
   getMe: async (req, res) => {
     res.json(req.user);
   },
 };
-
 const itemController = {
   getAllItems: async (req, res) => {
     const items = await prisma.item.findMany();
     res.json(items);
   },
-
   getItemById: async (req, res) => {
     const item = await prisma.item.findUnique({
       where: { id: Number(req.params.itemId) },
@@ -72,7 +69,6 @@ const itemController = {
     res.json(item);
   },
 };
-
 const commentController = {
   getCommentsByReview: async (req, res) => {
     const comments = await prisma.comment.findMany({
@@ -80,7 +76,6 @@ const commentController = {
     });
     res.json(comments);
   },
-
   createComment: async (req, res) => {
     const { content } = req.body;
     const newComment = await prisma.comment.create({
@@ -92,14 +87,12 @@ const commentController = {
     });
     res.status(201).json(newComment);
   },
-
   getMyComments: async (req, res) => {
     const comments = await prisma.comment.findMany({
       where: { userId: req.user.id },
     });
     res.json(comments);
   },
-
   updateComment: async (req, res) => {
     const { content } = req.body;
     const updatedComment = await prisma.comment.update({
@@ -108,7 +101,6 @@ const commentController = {
     });
     res.json(updatedComment);
   },
-
   deleteComment: async (req, res) => {
     await prisma.comment.delete({
       where: { id: Number(req.params.commentId), userId: req.user.id },

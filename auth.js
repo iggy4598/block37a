@@ -8,7 +8,6 @@ const isLoggedIn = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(" ")[1];
   if (!token) return res.status(401).send("Unauthorized");
-
   try {
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
     const user = await getUser(id);
@@ -18,7 +17,6 @@ const isLoggedIn = async (req, res, next) => {
     next(error);
   }
 };
-
 router.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -26,14 +24,10 @@ router.post("/register", async (req, res, next) => {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     res.status(201).json({ token });
   } catch (error) {
-    next(error);
     console.error("Registration Error:", error);
-    res
-      .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 });
-
 router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -46,11 +40,9 @@ router.post("/login", async (req, res, next) => {
     next(error);
   }
 });
-
 router.get("/me", isLoggedIn, (req, res) => {
   res.status(200).json(req.user);
 });
-
 module.exports = {
   router,
   isLoggedIn,

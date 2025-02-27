@@ -9,6 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/reviews', reviewRoutes);
